@@ -1,0 +1,18 @@
+<div
+  id="details"
+  *ngIf="books"
+  @detailsAnimation
+>
+    <div>
+        <div>
+            <p><strong>Details</strong></p>
+            <p id="titre">Titre: {{books.titre}}</p>
+            <p id="auteur">Auteur: {{books.auteur}}</p>
+            <p id="pages">Pages: {{books.pages}}</p>
+            <p id="dateSortie">Date de sortie: {{ formatDate(books.dateSortie) }}</p>
+        </div>
+    </div>
+    <button (click)="closeDetails()">
+        Fermer
+    </button>
+</div>

@@ -1,0 +1,38 @@
+<div id="body">
+    <form id="ajoutLivre" [formGroup]="booksForm" (submit)="onSubmit()">
+        <h1>Ajouter un Livre</h1>
+        <p>
+            <label for="titre">Titre:</label>
+            <input id="titre" type="text" formControlName="titre" name="titre" required>
+        </p>
+        <p>
+            <label for="auteur">Auteur:</label>
+            <input id="auteur" type="text" formControlName="auteur" name="auteur" required>
+        </p>
+        <p>
+            <label for="pages">Pages:</label>
+            <input id="pages" type="number" formControlName="pages" name="pages" required>
+        </p>
+        <p>
+            <label for="dateSortie">Date de sortie:</label>
+            <input id="dateSortie" type="date" formControlName="dateSortie" name="dateSortie" required>
+        </p>
+        <p>
+            <label for="image">Image:</label>
+            <input
+                id="images"
+                type="file"
+                formControlName="images"
+                (change)="onFileChange($event)"
+                accept="image/*"
+                />
+        </p>
+        <div *ngIf="imageBase64">
+            <img [src]="imageBase64" alt="Aperçu de l'image" style="max-width: 50px;max-height: 50px;" />
+        </div>
+        <p>
+            <button type="submit" *ngIf="!booksForm.valid" class="invalide" disabled>Formulaire invalide</button>
+            <button type="submit" *ngIf="booksForm.valid" [disabled]="!booksForm.valid" >Valider</button>
+        </p>
+    </form>
+</div>

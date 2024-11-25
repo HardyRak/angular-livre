@@ -1,0 +1,40 @@
+<div id="body">
+    <h1>Liste des livres</h1>
+    <a href="/ajout">
+        <button>➕ Ajouter un livre</button>
+    </a>
+    <div class="table-container">
+        <app-pagination (booksPaginate)="paginateList($event)" />
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Pages</th>
+                    <th>Détails</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of books" >
+                    <td>
+                        <img id="logo" src="{{ book.image }}">
+                    </td>
+                    <td>
+                        {{ book.titre }}
+                    </td>
+                    <td>
+                        {{ book.pages }}
+                    </td>
+                    <td>
+                        <button style="background-color:#7AA95C;" (click)="showDetails(book._id)">Détails</button>
+                    </td>
+                    <td>
+                        <button style="background-color:#A7001E;" (click)="deleteBooks(book._id)" >Supprimer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <app-details [books]="detailsBooks"/>
+</div>
