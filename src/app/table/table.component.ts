@@ -16,7 +16,7 @@ import { LocalStorageServiceService } from '../services/local-storage-service.se
 export class TableComponent {
   books: any[] = [];
   detailsBooks : any;
-  constructor(private fetchData : ConnectDataService,private router: Router,private localStorage : LocalStorageServiceService){}
+  constructor(private dataService : ConnectDataService,private router: Router,private localStorage : LocalStorageServiceService){}
   
   ngOnInit() {
     let pageList = this.localStorage.getItem('pageList');
@@ -27,18 +27,18 @@ export class TableComponent {
 
     const currentPage = Number.parseInt(pageList, 10);
   
-    this.fetchData.getBooks(currentPage).subscribe((data) => {
+    this.dataService.getBooks(currentPage).subscribe((data) => {
       this.books = data.books;
       if (data.totalPages) {
         this.localStorage.setItem('maxPage', data.totalPages.toString());
       }
     }, (error) => {
-      alert('Erreur lors de la recuperation des données');
+      console.log('Erreur lors de la recuperation des données');
     });
   }
 
   showDetails(idBook : string){
-    this.fetchData.getBookById(idBook).subscribe((data) => {
+    this.dataService.getBookById(idBook).subscribe((data) => {
       this.detailsBooks=data;
     });
   }
@@ -50,7 +50,7 @@ export class TableComponent {
   deleteBooks(_id : string){
     const confirmation = confirm("Êtes-vous sûr de vouloir supprimer ce livre ?");
     if(confirmation){
-      this.fetchData.deleteBook(_id).subscribe({
+      this.dataService.deleteBook(_id).subscribe({
         next : (data) => {
           alert('Suppression avec succés');
           window.location.reload();
@@ -59,6 +59,27 @@ export class TableComponent {
         },
       });
     }
+  }
+
+  sortTable(order : string ,orderType :string ){
+    let pageList = this.localStorage.getItem('pageList');
+    if (!pageList || isNaN(Number(pageList))) {
+      pageList = '1'; 
+      this.localStorage.setItem('pageList', pageList);
+    }
+
+    const currentPage = Number.parseInt(pageList, 10);
+    localStorage.setItem("currentOrder",order);
+    localStorage.setItem("currentOrderType",orderType);
+    this.dataService.getBooksWithOrder(currentPage,this.localStorage.getItem('currentOrder')?? 'id' ,
+                                       this.localStorage.getItem('currentOrderType')?? '1').subscribe((data) => {
+      this.books = data.books;
+      if (data.totalPages) {
+        this.localStorage.setItem('maxPage', data.totalPages.toString());
+      }
+    }, (error) => {
+      console.log('Erreur lors de la recuperation des données');
+    });
   }
 
 }

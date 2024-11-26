@@ -12,6 +12,10 @@ export class ConnectDataService {
     return this.httpClient.get<any>(`${this.baseUrl}/livre?page=${page}`);
   }
 
+  getBooksWithOrder(page : number ,order : string | null ,orderType :string | null ): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}/livre?page=${page}&order=${order}&orderType=${orderType}`);
+  }
+
   saveBooks(book: any): Observable<any> {
     return this.httpClient.post(`${this.baseUrl}/livre`, book);
   }

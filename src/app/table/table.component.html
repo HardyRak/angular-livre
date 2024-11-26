@@ -9,8 +9,14 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Titre</th>
-                    <th>Pages</th>
+                    <th>Titre
+                        <i class="fas fa-sort-up" (click)="sortTable('titre','1')" style="padding-left: 5px; cursor: pointer;"></i>
+                        <i class="fas fa-sort-down" (click)="sortTable('titre','-1')" style="padding-left: 5px; cursor: pointer;"></i>
+                    </th>
+                    <th>Pages 
+                        <i class="fas fa-sort-up" (click)="sortTable('pages','1')" style="padding-left: 5px; cursor: pointer;"></i>
+                        <i class="fas fa-sort-down" (click)="sortTable('pages','-1')" style="padding-left: 5px; cursor: pointer;"></i>
+                     </th>
                     <th>Détails</th>
                     <th>Supprimer</th>
                 </tr>
