@@ -10,7 +10,7 @@ import { FilterComponent } from '../filter/filter.component';
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule,PaginationComponent,DetailsComponent,FilterComponent],
+  imports: [CommonModule,PaginationComponent,DetailsComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
