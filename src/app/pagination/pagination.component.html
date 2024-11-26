@@ -1,4 +1,5 @@
 <div style="margin-top: 10px;">
+    <app-filter></app-filter>
     <p>{{currentPage}}/{{totalPage}} pages</p>
     <button id="prevButton" (click)="precPage()">Précédent</button>
     <input id="currentPage"[(ngModel)]="currentPage" (ngModelChange)="onInputChange()" type="number">

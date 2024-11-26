@@ -2,11 +2,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { ConnectDataService } from '../services/connect-data.service';
 import { FormsModule, Validators } from '@angular/forms';
 import { LocalStorageServiceService } from '../services/local-storage-service.service';
+import { FilterComponent } from '../filter/filter.component';
 
 @Component({
   selector: 'app-pagination',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,FilterComponent],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.css'
 })
