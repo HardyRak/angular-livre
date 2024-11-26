@@ -5,11 +5,12 @@ import { PaginationComponent } from '../pagination/pagination.component';
 import { DetailsComponent } from '../details/details.component';
 import { Router } from '@angular/router';
 import { LocalStorageServiceService } from '../services/local-storage-service.service';
+import { FilterComponent } from '../filter/filter.component';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule,PaginationComponent,DetailsComponent],
+  imports: [CommonModule,PaginationComponent,DetailsComponent,FilterComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })

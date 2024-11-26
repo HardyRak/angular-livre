@@ -4,6 +4,7 @@
         <button>➕ Ajouter un livre</button>
     </a>
     <div class="table-container">
+        <app-filter></app-filter>
         <app-pagination (booksPaginate)="paginateList($event)" />
         <table id="table">
             <thead>

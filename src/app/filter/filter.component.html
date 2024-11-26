@@ -1,1 +1,19 @@
-<p>filter works!</p>
+<button (click)="showfilter()" style="margin-bottom: 5px;" >Filtre</button>
+<form *ngIf="showFilter" id="ajoutLivre" @filterAnimation >
+    <div class="form-header">
+        <h1>Filtre</h1>
+        <i class="close-icon" (click)="closeFilter()">&#10005;</i>
+    </div>
+    <div class="form-container">
+        <div class="form-group">
+            <label for="pages">Pages:</label>
+            <input id="pages" type="number" formControlName="pages" name="pages" required>
+        </div>
+        <div class="form-group">
+            <label for="dateSortie">Date de sortie:</label>
+            <input id="dateSortie" type="date" formControlName="dateSortie" name="dateSortie" required>
+        </div>
+    </div>
+    <br>
+    <button type="submit">Valider</button>
+</form>
