@@ -21,8 +21,8 @@ export class PaginationComponent {
     this.totalPage = this.localStorage.getItem('maxPage') || '1';
   }
 
-  fetch(page : number){
-    this.fetchData.getBooks(page).subscribe({
+  fetch(page : number ,order : string | null ,orderType :string | null){
+    this.fetchData.getBooksWithOrder(page,order,orderType).subscribe({
       next : (data) => {
         this.booksPaginate.emit(data);
       },
@@ -31,11 +31,13 @@ export class PaginationComponent {
 
   nextPage(){
     let page=Number.parseInt(''+this.localStorage.getItem('pageList'));
+    const currentOrder=''+this.localStorage.getItem('currentOrder');
+    const currentOrderType=''+this.localStorage.getItem('currentOrderType');
     let totalPages=Number.parseInt(''+this.localStorage.getItem('maxPage'));
     console.log(totalPages,page);
     if(page<totalPages){
       page++;
-      this.fetch(page);
+      this.fetch(page,currentOrder,currentOrderType);
       this.localStorage.setItem('pageList',`${page}`);
       this.currentPage = `${page}`;
     }
@@ -43,9 +45,11 @@ export class PaginationComponent {
 
   precPage(){
     let page=Number.parseInt(''+this.localStorage.getItem('pageList'));
+    const currentOrder=''+this.localStorage.getItem('currentOrder');
+    const currentOrderType=''+this.localStorage.getItem('currentOrderType');
     if(page>1){
       page--;
-      this.fetch(page);
+      this.fetch(page,currentOrder,currentOrderType);
       this.localStorage.setItem('pageList',`${page}`);
       this.currentPage = `${page}`;
     }
@@ -54,12 +58,14 @@ export class PaginationComponent {
   onInputChange(){
     let page=Number.parseInt(this.currentPage+'');
     let totalPages=Number.parseInt(''+this.localStorage.getItem('maxPage'));
+    const currentOrder=''+this.localStorage.getItem('currentOrder');
+    const currentOrderType=''+this.localStorage.getItem('currentOrderType');
     if(page<1 || isNaN(page) ){
       page=1;
     }else if(page>totalPages){
       page=totalPages;
     }
-    this.fetch(page);
+    this.fetch(page,currentOrder,currentOrderType);
     this.localStorage.setItem('pageList',`${page}`);
     this.currentPage = `${page}`;
   }

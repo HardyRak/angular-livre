@@ -45,7 +45,7 @@ export class TableComponent {
 
   paginateList(data : any){
     this.books = data.books;
-  }
+  }   
 
   deleteBooks(_id : string){
     const confirmation = confirm("Êtes-vous sûr de vouloir supprimer ce livre ?");
